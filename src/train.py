@@ -255,7 +255,7 @@ def train(args):
 
     concat = ops.Concat()
     split_batch = ops.Split(0, output_num=2)
-    split_gpu = ops.Split(0)
+    split_npu = ops.Split(0)
 
     # load dataset
     if img_res == 1024:
@@ -340,14 +340,14 @@ def train(args):
     while True:
         for num in range(batch_num):
             (whole_real_img, whole_real_c) = training_set.get_all(num)
-            whole_real_img = split_gpu((Tensor(whole_real_img, ms.float32) / 127.5 - 1))
-            whole_real_c = split_gpu(Tensor(whole_real_c, ms.float32))
+            whole_real_img = split_npu((Tensor(whole_real_img, ms.float32) / 127.5 - 1))
+            whole_real_c = split_npu(Tensor(whole_real_c, ms.float32))
             whole_gen_z = Tensor(np.random.randn(len(phases) * batch_size, generator.z_dim), ms.float32)
-            whole_gen_z = [split_gpu(whole_gen_z) for whole_gen_z in split_batch(whole_gen_z)]
+            whole_gen_z = [split_npu(whole_gen_z) for whole_gen_z in split_batch(whole_gen_z)]
             whole_gen_c = [training_set.get_label(np.random.randint(len(training_set))) for _ in
                            range(len(phases) * batch_size)]
             whole_gen_c = Tensor(np.stack(whole_gen_c), ms.float32)
-            whole_gen_c = [split_gpu(whole_gen_c) for whole_gen_c in split_batch(whole_gen_c)]
+            whole_gen_c = [split_npu(whole_gen_c) for whole_gen_c in split_batch(whole_gen_c)]
 
             for phase, whole_gen_z, whole_gen_c in zip(phases, whole_gen_z, whole_gen_c):
                 if batch_idx % phase['interval'] != 0:
@@ -429,7 +429,7 @@ def parse_args():
     parser = argparse.ArgumentParser(description='train')
     parser.add_argument('--out_dir', help='path to generated images', type=str, default='./output/ffhq/', metavar='DIR')
     parser.add_argument('--gpus', help='number of GPUs to use', type=int, default=1, metavar='INT')
-    parser.add_argument('--device_target', type=str, default='GPU', help='platform')
+    parser.add_argument('--device_target', type=str, default='Ascend', help='platform')
     parser.add_argument('--device_id', type=int, default=0, help='appoint device_id if more than 1 device exist')
     parser.add_argument('--snap', help='snapshot interval', type=int, default=10, metavar='INT')
     parser.add_argument('--seed', help='random seed', type=int, default=0, metavar='INT')
