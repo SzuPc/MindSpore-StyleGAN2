@@ -40,6 +40,7 @@ python train.py --data_dir=../dataset/ffhq.zip --batch_size=1 --resume_train=./o
 
 训练完成后，我们的权重文件会生成在src/output_ffhq的文件夹里面
 
+然后我们可以进行推理
 ```
 python infer.py --seed=66,1518,389,230 --ckpt=./ckpt/ffhq/network-snapshot-000000-G_ema.ckpt --img_res=1024 --truncation_psi=1
 
