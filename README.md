@@ -11,9 +11,10 @@
 
 数据集存放的格式：以zip的格式存放到代码目录下面的dataset文件夹即可
 
+![image](https://github.com/SzuPc/MindSpore-StyleGAN2/assets/100685842/cbeaf997-df38-429b-853a-b39409dfb491)
 
 
-![image-20230807182943306](C:\Users\pw\AppData\Roaming\Typora\typora-user-images\image-20230807182943306.png)![image-20230807182956191](C:\Users\pw\AppData\Roaming\Typora\typora-user-images\image-20230807182956191.png)
+
 
 然后进入到src的文件夹里进行代码的训练和推理：
 
