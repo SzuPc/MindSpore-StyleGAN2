@@ -125,7 +125,7 @@ def parse_args():
     """
 
     parser = argparse.ArgumentParser(description='infer')
-    parser.add_argument('--device_target', type=str, default='GPU', help='platform')
+    parser.add_argument('--device_target', type=str, default='Ascend', help='platform')
     parser.add_argument('--device_id', type=int, default=0, help='appoint device_id if more than 1 device exist')
     parser.add_argument('--ckpt', default='./ckpt/ffhq/G_ema.ckpt', help='Network checkpoint')
     parser.add_argument('--seeds', type=num_range, default='66,1518,389,230',
