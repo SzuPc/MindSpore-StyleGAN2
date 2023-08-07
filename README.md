@@ -27,6 +27,9 @@ python train.py --data_dir=../dataset/ffhq.zip --batch_size=1 --start_over=True 
 注意batch_size 只能取1，如果取其他值需要在model/block.py的574行修改tensor的大小（因为我改了batch_size报错了一整天，但是感觉会有点麻烦）并且创建输出权重的文件夹（src/output_ffhq）
 
 因为从头训练时间非常的长（至少要20h，本来数据集少而且batch_size=1），所以我这里提供了预训练的权重，可以继续进行训练或者进行推理
+链接：https://pan.baidu.com/s/1ZaHvDCujayStYxKVQdhtrw 
+提取码：q851 
+
 
 继续训练：
 
